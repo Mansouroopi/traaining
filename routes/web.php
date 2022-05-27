@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ContactController;
+use App\Http\Controllers\PostController;
+
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,3 +25,11 @@ Route::get('about', function(){
 });
 
 Route::get('contact', [ContactController::class, 'contact']);
+
+Route::get('posts', [PostController::class , 'index']);
+Route::get('posts/create', [PostController::class , 'create']);
+Route::get('posts/{id}', [PostController::class , 'show']);
+Route::get('posts/{id}/edit', [PostController::class , 'edit']);
+Route::post('posts', [PostController::class , 'store']);
+Route::put('posts/{id}', [PostController::class , 'update']);
+Route::delete('posts/{id}', [PostController::class , 'destroy']);
