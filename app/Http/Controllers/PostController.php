@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\StorePostRequest;
 use App\Http\Requests\UpdatePostRequest;
+use App\Models\Category;
 use App\Models\Post;
 
 class PostController extends Controller
@@ -27,7 +28,8 @@ class PostController extends Controller
      */
     public function create()
     {
-        return view('posts.create');
+        $categories = Category::all();
+        return view('posts.create', compact('categories'));
     }
 
     /**
@@ -39,10 +41,12 @@ class PostController extends Controller
     public function store(StorePostRequest $request)
     {
 
+
          $post = new Post;
          $post->title = $request->title;
          $post->body = $request->body;
-         $post->user_id = 1;
+         $post->user_id = auth()->id(); //user id
+         $post->category_id = $request->category_id;
          $post->save();
 
          return redirect('posts');
@@ -71,7 +75,8 @@ class PostController extends Controller
     public function edit( $id)
     {
          $post = Post::findOrFail($id);
-        return view('posts.edit', compact('post'));
+         $categories = Category::all();
+        return view('posts.edit', compact(['post', 'categories']));
     }
 
     /**
@@ -86,6 +91,7 @@ class PostController extends Controller
         $post = Post::findOrFail($id);
         $post->title = $request->title;
         $post->body = $request->body;
+        $post->category_id = $request->category_id;
         $post->save();
         return redirect('posts');
 

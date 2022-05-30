@@ -7,7 +7,7 @@
       @forelse ($posts as $post)
          <h2>{{ $post->title }}</h2>
         <h5><span class="glyphicon glyphicon-time"></span> Post by {{ $post->user->name }}, {{ $post->created_at }}.</h5>
-        <h5><span class="label label-danger">Food</span> <span class="label label-primary">Ipsum</span></h5><br>
+        <h5><span class="label label-danger">{{ $post->category->name ?? '' }}</span> </h5><br>
         <p>{{ $post->body }}</p>
         <a href="/posts/{{ $post->id }}">view</a>
          <a href="/posts/{{ $post->id }}/edit">Edit</a>

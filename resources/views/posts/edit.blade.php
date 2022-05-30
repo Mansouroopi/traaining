@@ -31,6 +31,15 @@
         <textarea type="text" name="body" cols="10" row="5" class="form-control" placeholder="Enter Title.."> {{ $post->body }}</textarea>
       </div>
 
+        <div class="input-group">
+       <select name="category_id" class="form-control">
+           @foreach ($categories as $category)
+                <option value="{{ $category->id }}">{{ $category->name }}</option>
+           @endforeach
+
+       </select>
+      </div>
+
 
   <div class="input-group">
        <button type="submit" class="btn btn-info">Update Post</button>
